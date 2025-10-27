@@ -1,14 +1,18 @@
 package racingcar.controller;
 
-import racingcar.application.CarNameParser;
+import racingcar.application.RacingParser;
 import racingcar.view.RacingInput;
 
+import java.math.BigInteger;
 import java.util.List;
 
 public class RacingController {
     public void run() {
-        String inputData = RacingInput.readCarNames();
-        List<String> carNames = CarNameParser.parseCarNames(inputData);
+        String carNamesInput = RacingInput.readCarNames();
+        List<String> carNames = RacingParser.parseCarNames(carNamesInput);
+
+        String attemptCountInput = RacingInput.readAttemptCount();
+        BigInteger attemptCount = RacingParser.parseAttemptCount(attemptCountInput);
 
 
     }

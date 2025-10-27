@@ -1,7 +1,6 @@
 package racingcar.view;
 
 import org.junit.jupiter.api.Test;
-import racingcar.application.CarNameParser;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 

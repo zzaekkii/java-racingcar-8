@@ -1,11 +1,12 @@
 package racingcar.application;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CarNameParser {
+public class RacingParser {
 
-    private CarNameParser() {
+    private RacingParser() {
     }
 
     public static List<String> parseCarNames(String input) {
@@ -32,6 +33,19 @@ public class CarNameParser {
         }
         if (names.contains(name)) {
             throw new IllegalArgumentException("중복된 자동차 이름이 있습니다.");
+        }
+    }
+
+    public static BigInteger parseAttemptCount(String input) {
+        try {
+            BigInteger count = new BigInteger(input);
+            if (count.compareTo(BigInteger.ZERO) <= 0) {
+               throw new IllegalArgumentException("시도 횟수는 양수여야 합니다.");
+            }
+
+            return count;
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("시도 횟수는 숫자만 입력 가능합니다.");
         }
     }
 }
