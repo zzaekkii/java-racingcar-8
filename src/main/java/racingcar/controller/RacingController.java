@@ -1,6 +1,8 @@
 package racingcar.controller;
 
+import racingcar.application.RacingGame;
 import racingcar.application.RacingParser;
+import racingcar.domain.Car;
 import racingcar.view.RacingInput;
 
 import java.math.BigInteger;
@@ -14,6 +16,10 @@ public class RacingController {
         String attemptCountInput = RacingInput.readAttemptCount();
         BigInteger attemptCount = RacingParser.parseAttemptCount(attemptCountInput);
 
+        RacingGame racingGame = new RacingGame(
+            carNames.stream().map(Car::new).toList()
+        );
 
+        racingGame.start(attemptCount);
     }
 }
