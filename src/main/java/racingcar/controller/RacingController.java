@@ -4,6 +4,7 @@ import racingcar.application.RacingGame;
 import racingcar.application.RacingParser;
 import racingcar.domain.Car;
 import racingcar.view.RacingInput;
+import racingcar.view.RacingOutput;
 
 import java.math.BigInteger;
 import java.util.List;
@@ -21,5 +22,8 @@ public class RacingController {
         );
 
         racingGame.start(attemptCount);
+
+        List<Car> winners = racingGame.getWinners();
+        RacingOutput.printWinners(winners);
     }
 }

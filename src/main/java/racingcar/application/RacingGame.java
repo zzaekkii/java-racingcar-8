@@ -4,7 +4,9 @@ import camp.nextstep.edu.missionutils.Randoms;
 import racingcar.domain.Car;
 
 import java.math.BigInteger;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class RacingGame {
 
@@ -41,5 +43,16 @@ public class RacingGame {
             System.out.println();
         }
         System.out.println();
+    }
+
+    public List<Car> getWinners() {
+        BigInteger maxPosition = cars.stream()
+            .map(Car::getPosition)
+            .max(Comparator.naturalOrder())
+            .orElse(BigInteger.ZERO);
+
+        return cars.stream()
+            .filter(car -> car.getPosition().equals(maxPosition))
+            .collect(Collectors.toList());
     }
 }
