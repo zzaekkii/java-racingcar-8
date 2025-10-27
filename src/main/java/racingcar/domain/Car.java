@@ -11,7 +11,7 @@ public class Car {
     }
 
     public void move(int number) {
-        if (number > 4) {
+        if (number >= 4) {
             position = position.add(BigInteger.ONE);;
         }
     }
