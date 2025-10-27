@@ -37,15 +37,18 @@ public class RacingParser {
     }
 
     public static BigInteger parseAttemptCount(String input) {
-        try {
-            BigInteger count = new BigInteger(input);
-            if (count.compareTo(BigInteger.ZERO) <= 0) {
-               throw new IllegalArgumentException("시도 횟수는 양수여야 합니다.");
-            }
+        BigInteger count;
 
-            return count;
+        try {
+            count = new BigInteger(input);
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("시도 횟수는 숫자만 입력 가능합니다.");
         }
+
+        if (count.compareTo(BigInteger.ZERO) <= 0) {
+            throw new IllegalArgumentException("시도 횟수는 양수여야 합니다.");
+        }
+
+        return count;
     }
 }

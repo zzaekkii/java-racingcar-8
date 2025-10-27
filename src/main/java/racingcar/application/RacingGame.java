@@ -34,15 +34,17 @@ public class RacingGame {
 
     private void printRoundResult() {
         for (Car car : cars) {
-            System.out.print(car.getName() + " : ");
-
-            BigInteger distance = car.getPosition();
-            for(BigInteger i = BigInteger.ZERO; i.compareTo(distance) < 0; i = i.add(BigInteger.ONE)) {
-                System.out.print("-");
-            }
-            System.out.println();
+            System.out.println(car.getName() + " : " + buildDistance(car.getPosition()));
         }
         System.out.println();
+    }
+
+    private String buildDistance(BigInteger distance) {
+        StringBuilder track = new StringBuilder();
+        for (BigInteger i = BigInteger.ZERO; i.compareTo(distance) < 0; i = i.add(BigInteger.ONE)) {
+            track.append("-");
+        }
+        return track.toString();
     }
 
     public List<Car> getWinners() {
