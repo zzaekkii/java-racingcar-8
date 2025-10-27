@@ -19,9 +19,9 @@ class RacingGameTest {
         woni.move(8);
 
         RacingGame game = new RacingGame(List.of(pobi, woni, jun));
-        List<Car> winners = game.getWinners();
+        List<String> winners = game.getWinners();
 
-        assertThat(winners).containsExactly(pobi);
+        assertThat(winners).containsExactly("pobi");
     }
 
     @Test
@@ -36,8 +36,8 @@ class RacingGameTest {
         woni.move(8);
 
         RacingGame game = new RacingGame(List.of(pobi, woni, jun));
-        List<Car> winners = game.getWinners();
+        List<String> winners = game.getWinners();
 
-        assertThat(winners).containsExactly(pobi, woni);
+        assertThat(winners).containsExactly("pobi", "woni");
     }
 }

@@ -47,7 +47,7 @@ public class RacingGame {
         return track.toString();
     }
 
-    public List<Car> getWinners() {
+    public List<String> getWinners() {
         BigInteger maxPosition = cars.stream()
             .map(Car::getPosition)
             .max(Comparator.naturalOrder())
@@ -55,6 +55,7 @@ public class RacingGame {
 
         return cars.stream()
             .filter(car -> car.getPosition().equals(maxPosition))
+            .map(Car::getName)
             .collect(Collectors.toList());
     }
 }

@@ -23,7 +23,7 @@ public class RacingController {
 
         racingGame.start(attemptCount);
 
-        List<Car> winners = racingGame.getWinners();
+        List<String> winners = racingGame.getWinners();
         RacingOutput.printWinners(winners);
     }
 }
