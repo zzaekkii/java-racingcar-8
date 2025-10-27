@@ -2,6 +2,7 @@ package racingcar.application;
 
 import org.junit.jupiter.api.Test;
 
+import java.math.BigInteger;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -17,35 +18,62 @@ class RacingParserTest {
     @Test
     void 쉼표_외_구분자는_예외_처리() {
         assertThatThrownBy(() -> RacingParser.parseCarNames("pobi;woni,jun"))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("5자 이하");
+            .isInstanceOf(IllegalArgumentException.class)
+            .hasMessageContaining("5자 이하");
     }
 
     @Test
     void 자동차_이름이_5자_초과면_예외() {
         assertThatThrownBy(() -> RacingParser.parseCarNames("pobipobi,woni,jun"))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("5자 이하");
+            .isInstanceOf(IllegalArgumentException.class)
+            .hasMessageContaining("5자 이하");
     }
 
     @Test
     void 자동차_이름_중복_불가능() {
         assertThatThrownBy(() -> RacingParser.parseCarNames("pobi,woni,jun,pobi"))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("중복");
+            .isInstanceOf(IllegalArgumentException.class)
+            .hasMessageContaining("중복");
     }
 
     @Test
     void 자동차_이름에_알파벳이나_숫자가_아닌_문자가_포함되면_예외() {
         assertThatThrownBy(() -> RacingParser.parseCarNames("p@bi,woni,ju^"))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("알파벳과 숫자로만");
+            .isInstanceOf(IllegalArgumentException.class)
+            .hasMessageContaining("알파벳과 숫자로만");
     }
 
     @Test
     void 자동차_이름은_비어있을_수_없다() {
         assertThatThrownBy(() -> RacingParser.parseCarNames("pobi,,jun"))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("자동차 이름이 비어");
+            .isInstanceOf(IllegalArgumentException.class)
+            .hasMessageContaining("자동차 이름이 비어");
+    }
+
+    @Test
+    void 시도_횟수_정상_변환() {
+        BigInteger result = RacingParser.parseAttemptCount("818");
+        assertThat(result).isEqualTo(new BigInteger("818"));
+    }
+
+    @Test
+    void 시도_횟수가_0이면_예외() {
+        assertThatThrownBy(() -> RacingParser.parseAttemptCount("0"))
+            .isInstanceOf(IllegalArgumentException.class)
+            .hasMessageContaining("양수");
+    }
+
+    @Test
+    void 시도_횟수가_음수면_예외() {
+        assertThatThrownBy(() -> RacingParser.parseAttemptCount("-1888"))
+            .isInstanceOf(IllegalArgumentException.class)
+            .hasMessageContaining("양수");
+    }
+
+    @Test
+    void 시도_횟수는_숫자만_입력_가능하다() {
+        assertThatThrownBy(() -> RacingParser.parseAttemptCount("abc"))
+            .isInstanceOf(IllegalArgumentException.class)
+            .hasMessageContaining("숫자만");
     }
 }
